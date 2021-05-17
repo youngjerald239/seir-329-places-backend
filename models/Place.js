@@ -1,9 +1,8 @@
+// Pull Schema and model from mongoose
+const { Schema, model } = require("mongoose");
+
 // Import Mongoose
 const mongoose = require("mongoose");
-
-// Pull Schema and model from mongoose
-const Schema = mongoose.Schema;
-const model = mongoose.model;
 
 // Create Place Schema
 const placeSchema = new Schema(
