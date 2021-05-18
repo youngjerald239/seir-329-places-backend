@@ -1,44 +1,31 @@
-///////////////////////////
-// Environmental Variables
-///////////////////////////
+// GET ENVIRONMENTAL VARIABLES
 require("dotenv").config();
-const { PORT = 3000, NODE_ENV = "development" } = process.env;
 
-//MONGO CONNECTION
-// const mongoose = require("./DB/connection");
+//GET PORT FROM ENV VARIABLES
+const PORT = process.env.PORT;
 
-//CORS
-const cors = require("cors");
-const corsOptions = require("./configs/cors");
-
-//Bringing in Express
+// IMPORT DEPENDENCIES
 const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+
+// IMPORT PEOPlE ROUTER
+const peopleRouter = require("./controllers/Place")
+
+// IMPORT DATABASE CONNECTION
+// const mongoose = require("./db/connection");
+
+// CREATE EXPRESS APPLICATION OBJECT
 const app = express();
 
-//OTHER IMPORTS
-const morgan = require("morgan");
-const placeRouter = require("./controllers/Place");
+// Setup Middleware
+app.use(cors()); // <----- add cors headers
+app.use(express.json()); // <---- parses JSON bodies and adds them to req.body
+app.use(morgan("tiny")); // <----- logging for debugging
 
-////////////
-//MIDDLEWARE
-////////////
-NODE_ENV === "production" ? app.use(cors(corsOptions)) : app.use(cors());
-app.use(express.json());
-app.use(morgan("tiny")); //logging
-app.use(cors())
-///////////////
-//Routes and Routers
-//////////////
-
-//Route for testing server is working
-app.get("/", (req, res) => {
-  res.json({ hello: "Hello World!" });
-});
-
-// Dog Routes send to dog router
-app.use("/place", placeRouter);
+// ROUTES AND ROUTES
+app.get("/", (req, res) => res.send("Server is Working")); // <--- Route to test server
+app.use("/places", peopleRouter) // send all "/places" requires to the peopleRouter
 
 //LISTENER
-app.listen(PORT, () => {
-  console.log(`Your are listening on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

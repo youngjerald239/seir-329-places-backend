@@ -1,5 +1,9 @@
+// Import Mongoose
+const mongoose = require("mongoose");
+
 // Pull Schema and model from mongoose
-const { Schema, model } = require("mongoose");
+const Schema = mongoose.Schema;
+const model = mongoose.model;
 
 // Create Place Schema
 const placeSchema = new Schema(
@@ -12,7 +16,7 @@ const placeSchema = new Schema(
 );
 
 // Create our Model Object
-const Place = model("place", placeSchema);
+const Place = model("Place", placeSchema)
 
 // Export our Model Object
-module.exports = Place;
+module.exports = Place
