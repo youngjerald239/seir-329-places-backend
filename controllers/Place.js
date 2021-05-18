@@ -47,9 +47,11 @@ router.get("/seed", async (req, res) => {
 // Index Route
 router.get("/", async (req, res) => {
   try {
+    console.count()
     // query database for all the places
     const places = await Place.find({});
     // send places as JSON
+    console.count()
     res.json(places);
   } catch (error) {
     // return error as JSON with an error status

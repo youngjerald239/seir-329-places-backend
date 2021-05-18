@@ -13,7 +13,7 @@ const cors = require("cors");
 const peopleRouter = require("./controllers/Place")
 
 // IMPORT DATABASE CONNECTION
-// const mongoose = require("./db/connection");
+const mongoose = require("./db/connection");
 
 // CREATE EXPRESS APPLICATION OBJECT
 const app = express();
